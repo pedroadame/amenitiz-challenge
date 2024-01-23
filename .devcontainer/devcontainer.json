@@ -1,0 +1,11 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "configureZshAsDefaultShell": true,
+      "username": "pedroadame"
+    },
+    "ghcr.io/devcontainers/features/ruby:1": {},
+    "ghcr.io/guiyomh/features/vim:0": {}
+  }
+}
