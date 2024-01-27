@@ -1,0 +1,2 @@
+require './lib/store'
+puts Store.method
