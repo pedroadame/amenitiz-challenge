@@ -1,5 +1,7 @@
 class Store
-  def self.method
-    puts "Hello world"
+  attr_reader :cart
+
+  def initialize
+    @cart = Store::Cart.new
   end
 end
