@@ -15,21 +15,21 @@ RSpec.describe Store do
     context 'and the product is green tea' do
       before { @store.add_item(:green_tea) }
       it 'the green tea is added to the user\'s cart' do
-        expect(@store.cart[0].code).to eq('GR1')
+        expect(@store.cart[0][:code]).to eq('GR1')
       end
     end
 
     context 'and the product is strawberries' do
       before { @store.add_item(:strawberries) }
       it 'strawberries are added to the user\'s cart' do
-        expect(@store.cart[0].code).to eq('SR1')
+        expect(@store.cart[0][:code]).to eq('SR1')
       end
     end
 
     context 'and the product is a coffee' do
       before { @store.add_item(:coffee) }
       it 'the coffee is added to the user\'s cart' do
-        expect(@store.cart[0].code).to eq('CF1')
+        expect(@store.cart[0][:code]).to eq('CF1')
       end
     end
   end
