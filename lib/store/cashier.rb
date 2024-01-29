@@ -9,4 +9,15 @@ class Store::Cashier
 
     @rules = rules
   end
+
+  # Calculates the total for a given cart
+  def total(cart)
+    total = 0.0
+
+    cart.items.each do |item|
+      total += item[:price]
+    end
+
+    total
+  end
 end
