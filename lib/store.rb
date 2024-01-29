@@ -17,6 +17,8 @@ class Store
 
   # Adds an item of the given type to the cart
   def add_item(type)
+    return unless @stock.key?(type)
+
     @cart.add(@stock[type])
   end
 end
