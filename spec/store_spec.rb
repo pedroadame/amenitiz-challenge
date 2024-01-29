@@ -32,5 +32,13 @@ RSpec.describe Store do
         expect(@store.cart[0][:code]).to eq('CF1')
       end
     end
+
+    context 'and the product does not exist' do
+      it 'bypasses the add intent' do
+        expect(@store.cart).to_not receive(:add)
+
+        @store.add_item(:shoes)
+      end
+    end
   end
 end
