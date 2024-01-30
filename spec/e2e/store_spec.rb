@@ -20,7 +20,7 @@ RSpec.describe "User uses the Store" do
 
     expect(@store.total).to eq(3.11)
   end
-  
+
   it 'complies with test data 2' do
     @store.add_item(:strawberries)
     @store.add_item(:strawberries)
@@ -37,5 +37,14 @@ RSpec.describe "User uses the Store" do
     @store.add_item(:coffee)
     @store.add_item(:coffee)
     expect(@store.total).to eq(30.57)
+  end
+
+  # i.e the 2x1 offer applies to a group of two teas. A third one should be charged at full price
+  it 'last green tea in odd quantities is full-priced' do
+    @store.add_item(:green_tea)
+    @store.add_item(:green_tea)
+    @store.add_item(:green_tea)
+
+    expect(@store.total).to eq(6.22)
   end
 end
