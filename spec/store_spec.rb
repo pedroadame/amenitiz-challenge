@@ -13,21 +13,21 @@ RSpec.describe Store do
 
   context 'when user asks for a product' do
     context 'and the product is green tea' do
-      before { @store.add_item(:green_tea) }
+      before { @store.scan(:green_tea) }
       it 'the green tea is added to the user\'s cart' do
         expect(@store.cart[0][:code]).to eq('GR1')
       end
     end
 
     context 'and the product is strawberries' do
-      before { @store.add_item(:strawberries) }
+      before { @store.scan(:strawberries) }
       it 'strawberries are added to the user\'s cart' do
         expect(@store.cart[0][:code]).to eq('SR1')
       end
     end
 
     context 'and the product is a coffee' do
-      before { @store.add_item(:coffee) }
+      before { @store.scan(:coffee) }
       it 'the coffee is added to the user\'s cart' do
         expect(@store.cart[0][:code]).to eq('CF1')
       end
@@ -37,7 +37,7 @@ RSpec.describe Store do
       it 'bypasses the add intent' do
         expect(@store.cart).to_not receive(:add)
 
-        @store.add_item(:shoes)
+        @store.scan(:shoes)
       end
     end
   end

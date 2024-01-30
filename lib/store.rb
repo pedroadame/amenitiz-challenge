@@ -1,21 +1,22 @@
 # Describes the main store of the app
 
 class Store
-  attr_reader :cart, :stock, :cashier
+  # Available products
+  attr_accessor :stock
 
-  def initialize(stock)
-    # Available products
-    @stock = stock
+  attr_reader :cart, :cashier
 
+  def initialize(pricing_rules = [])
     # User's cart
     @cart = Store::Cart.new
 
     # Cashier for total calculation
     @cashier = Store::Cashier.new
+    pricing_rules.each { |rule| @cashier.add_rule(rule) }
   end
 
   # Adds an item of the given type to the cart
-  def add_item(type)
+  def scan(type)
     return unless @stock.key?(type)
 
     cart.add(@stock[type])
