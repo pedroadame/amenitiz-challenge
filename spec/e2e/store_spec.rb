@@ -7,7 +7,7 @@ RSpec.describe "User uses the Store" do
     }
 
     @store = Store.new(stock)
-    @store.add_pricing_rule(Store::PricingRule.new(:gr1, 3.11 * 0.5, {exact: 2}))
+    @store.add_pricing_rule(Store::PricingRule.new(:gr1, 3.11 * 0.5, {every: 2}))
     @store.add_pricing_rule(Store::PricingRule.new(:sr1, 4.50, {more_than_or_equals_to: 3}))
     @store.add_pricing_rule(Store::PricingRule.new(:cf1, 11.23 * 2/3r, {more_than_or_equals_to: 3}))
 
