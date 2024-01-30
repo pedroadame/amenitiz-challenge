@@ -107,7 +107,10 @@ def generate_store
     coffee: {code: 'CF1', name: 'Coffee', price: 11.23}
   }
 
-  Store.new(stock)
+  store = Store.new
+  store.stock = stock
+
+  store
 end
 
 def new_item
