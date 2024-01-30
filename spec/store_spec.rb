@@ -41,4 +41,12 @@ RSpec.describe Store do
       end
     end
   end
+
+  describe '#total' do
+    it 'asks cashier for the total' do
+      expect(@store.cashier).to receive(:total)
+
+      @store.total
+    end
+  end
 end

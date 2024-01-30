@@ -18,6 +18,10 @@ class Store
   def add_item(type)
     return unless @stock.key?(type)
 
-    @cart.add(@stock[type])
+    cart.add(@stock[type])
+  end
+
+  def total
+    @cashier.total(cart)
   end
 end
