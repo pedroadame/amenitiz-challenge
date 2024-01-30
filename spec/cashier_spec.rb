@@ -18,7 +18,7 @@ RSpec.describe Store::Cashier do
 
   describe '#total' do
     context 'with one item' do
-      before { @store.add_item(:coffee) }
+      before { @store.scan(:coffee) }
       it 'returns item total' do
         expect(@cashier.total(@store.cart)).to eq(@store.stock[:coffee][:price])
       end
@@ -26,8 +26,8 @@ RSpec.describe Store::Cashier do
 
     context 'without pricing rules' do
       before do
-        @store.add_item(:green_tea)
-        @store.add_item(:strawberries)
+        @store.scan(:green_tea)
+        @store.scan(:strawberries)
       end
 
       it 'returns sum of price of all products' do
@@ -38,8 +38,8 @@ RSpec.describe Store::Cashier do
 
     context 'with pricing rules' do
       before do
-        @store.add_item(:green_tea)
-        @store.add_item(:strawberries)
+        @store.scan(:green_tea)
+        @store.scan(:strawberries)
         @rule = Store::PricingRule.new(:gr1, 1.5, {exact: 1})
         @invalid_rule = Store::PricingRule.new(:st1, 1.5, {any: 1})
         @cashier.add_rule(@rule)
