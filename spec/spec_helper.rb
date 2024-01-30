@@ -98,3 +98,14 @@ RSpec.configure do |config|
 end
 
 require 'pry'
+
+# Factory for a preconfigured store, as stock must be configurable
+def generate_store
+  stock = {
+    green_tea: {code: 'GR1', name: 'Green Tea', price: 3.11},
+    strawberries: {code: 'SR1', name: 'Strawberries', price: 5.00},
+    coffee: {code: 'CF1', name: 'Coffee', price: 11.23}
+  }
+
+  Store.new(stock)
+end

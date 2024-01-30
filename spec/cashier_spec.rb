@@ -5,7 +5,7 @@ require './lib/store/pricing_rule'
 
 RSpec.describe Store::Cashier do
   before(:each) do
-    @store = Store.new
+    @store = generate_store
     @cashier = described_class.new
   end
 

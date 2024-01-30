@@ -3,7 +3,7 @@ require './lib/store/cart'
 
 RSpec.describe Store::Cart do
   before(:each) do
-    @store = Store.new
+    @store = generate_store
     @cart = @store.cart
   end
 
