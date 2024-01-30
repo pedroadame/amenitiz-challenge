@@ -6,7 +6,7 @@ RSpec.describe Store::PricingRule do
     @rule = described_class.new
     @rule.matching = {exact: 2}
     @rule.price = 1.0
-    @rule.type = :green_type
+    @rule.type = :gr1
     @rule
   end
 

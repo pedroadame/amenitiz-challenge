@@ -37,7 +37,20 @@ RSpec.describe Store::Cashier do
     end
 
     context 'with pricing rules' do
+      before do
+        @store.add_item(:green_tea)
+        @store.add_item(:strawberries)
+        @rule = Store::PricingRule.new(:gr1, 1.5, {exact: 1})
+        @invalid_rule = Store::PricingRule.new(:st1, 1.5, {any: 1})
+        @cashier.add_rule(@rule)
+        @cashier.add_rule(@invalid_rule)
+      end
+
       it 'applies only valid rules' do
+        expect(@cashier).to receive(:apply_rule).with(@rule, [@store.cart[0]]).and_call_original
+        expect(@cashier).to_not receive(:apply_rule).with(@invalid_rule, [@store.cart[1]]).and_call_original
+
+        @cashier.total(@store.cart)
       end
     end
   end
