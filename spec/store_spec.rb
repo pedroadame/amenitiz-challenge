@@ -49,4 +49,14 @@ RSpec.describe Store do
       @store.total
     end
   end
+
+  describe '#add_pricing_rule' do
+    it 'asks cashier to add rule' do
+      expect(@store.cashier).to receive(:add_rule)
+
+      rule = Store::PricingRule.new(:voucher, 2, {exact: 2})
+
+      @store.add_pricing_rule(rule)
+    end
+  end
 end

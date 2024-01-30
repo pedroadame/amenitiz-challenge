@@ -24,4 +24,8 @@ class Store
   def total
     @cashier.total(cart)
   end
+
+  def add_pricing_rule(rule)
+    @cashier.add_rule(rule)
+  end
 end
