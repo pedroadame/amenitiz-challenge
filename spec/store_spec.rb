@@ -1,7 +1,7 @@
 require './lib/store'
 
 RSpec.describe Store do
-  before(:each) { @store = Store.new }
+  before(:each) { @store = generate_store }
 
   context 'when initalized' do
     describe 'user\'s cart' do
