@@ -1,5 +1,7 @@
 require './lib/store'
 require './lib/store/cashier'
+require './lib/store/cart'
+require './lib/store/pricing_rule'
 
 RSpec.describe Store::Cashier do
   before(:each) do
@@ -8,18 +10,9 @@ RSpec.describe Store::Cashier do
   end
 
   describe '#initialize' do
-    context 'when passing rules' do
-      it 'assigns an empty array' do
-        cashier = described_class.new
-        expect(cashier.rules).to be_empty
-      end
-    end
-
-    context 'without passing rules' do
-      it 'assigns passed rules' do
-        cashier = described_class.new([:rule1, :rule2])
-        expect(cashier.rules.size).to eq(2)
-      end
+    it 'assigns an empty hash for rules' do
+      cashier = described_class.new
+      expect(cashier.rules.keys).to be_empty
     end
   end
 
@@ -41,6 +34,20 @@ RSpec.describe Store::Cashier do
         expected_price = @store.stock[:green_tea][:price] + @store.stock[:strawberries][:price]
         expect(@cashier.total(@store.cart)).to eq(expected_price)
       end
+    end
+
+    context 'with pricing rules' do
+      it 'applies only valid rules' do
+      end
+    end
+  end
+
+  describe '#add_rule' do
+    it 'adds a rule to list' do
+      rule = Store::PricingRule.new(:green_tea, 1.5, {exact: 2})
+      expect(@cashier.rules.keys.size).to eq(0)
+      @cashier.add_rule(rule)
+      expect(@cashier.rules.keys.size).to eq(1)
     end
   end
 end
