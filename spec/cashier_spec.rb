@@ -63,4 +63,29 @@ RSpec.describe Store::Cashier do
       expect(@cashier.rules.keys.size).to eq(1)
     end
   end
+
+  describe '#apply_rule' do
+    before(:each) { @rule = Store::PricingRule.new(:green_tea, 2, {exact: 2}) }
+    context 'when is suitable for items' do
+      it 'returns the sum of the rule price' do
+        items = item_list(2)
+
+        # Private method
+        price = @cashier.send :apply_rule, @rule, items
+
+        expect(price).to eq(4.00)
+      end
+    end
+
+    context 'when is not' do
+      it 'returns the sum of the original price' do
+        items = item_list(3)
+
+        # Private method
+        price = @cashier.send :apply_rule, @rule, items
+
+        expect(price).to eq(15.00)
+      end
+    end
+  end
 end

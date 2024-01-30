@@ -23,16 +23,26 @@ class Store::Cashier
       if rule&.valid?
         total += apply_rule(rule, grouped[item_type])
       else
-        total += grouped[item_type].map { |x| x[:price] }.inject(:+)
+        total += sum_items_price(grouped[item_type])
       end
     end
 
     total
   end
 
+  private
+
   # Returns sumed total for the given rule's item type of all matching items
   # in cart
   def apply_rule(rule, items)
-    0.0
+    if rule.applies?(items)
+      rule.get_total(items)
+    else
+      sum_items_price(items)
+    end
+  end
+
+  def sum_items_price(items)
+    items.map {|x| x[:price] }.sum
   end
 end

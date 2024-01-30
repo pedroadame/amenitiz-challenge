@@ -178,15 +178,3 @@ RSpec.describe Store::PricingRule do
     end
   end
 end
-
-# Helpers for avoiding code repetition
-
-def new_item
-  {code: 'GR1', name: 'Green Tea', price: 5.00}
-end
-
-def item_list(n = 2)
-  items = []
-  n.times { items << new_item }
-  items
-end

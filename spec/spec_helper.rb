@@ -109,3 +109,13 @@ def generate_store
 
   Store.new(stock)
 end
+
+def new_item
+  {code: 'GR1', name: 'Green Tea', price: 5.00}
+end
+
+def item_list(n = 2)
+  items = []
+  n.times { items << new_item }
+  items
+end
