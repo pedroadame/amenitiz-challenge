@@ -1,2 +1,85 @@
+require 'io/console'
 require './lib/store'
-puts Store.method
+require './lib/store/cart'
+require './lib/store/cashier'
+require './lib/store/pricing_rule'
+
+# Initialize Store with desired stock and rules
+stock = {
+  green_tea: {code: 'GR1', name: 'Green Tea', price: 3.11},
+  strawberries: {code: 'SR1', name: 'Strawberries', price: 5.00},
+  coffee: {code: 'CF1', name: 'Coffee', price: 11.23}
+}
+
+rules = [
+  Store::PricingRule.new(:gr1, 3.11 * 0.5, {every: 2}),
+  Store::PricingRule.new(:sr1, 4.50, {more_than_or_equals_to: 3}),
+  Store::PricingRule.new(:cf1, 11.23 * 2/3r, {more_than_or_equals_to: 3})
+]
+
+@store = Store.new(rules)
+@store.stock = stock
+
+def wait
+  puts 'Press any key to continue'
+  STDIN.getch
+end
+
+def clear_screen
+  system('cls') || system('clear')
+end
+
+def show_offers
+  puts 'Current available offers:'
+  puts '  2 x 1 on Green Teas'
+  puts '  Each unit of strawberries cost 4.50 € if you buy three or more'
+  puts '  Each coffee cost 2/3 of the price if you buy three or more'
+  wait
+end
+
+def show_cart
+  puts 'Your current cart contains:'
+
+  if @store.cart.items.any?
+    @store.cart.items.group_by { |x| x[:code] }.each do |key, items|
+      puts "  #{items.size} x #{items[0][:name]}"
+    end
+  else
+    puts " - Cart is empty -"
+  end
+
+  puts ''
+  puts "Total: #{@store.total} €"
+
+  wait
+end
+
+def ask_user
+  puts 'Welcome to our Store'
+  puts '--------'
+  puts 'Choose an option by entering a number followed by ENTER '
+  puts '1 - Add "Green Tea" to cart'
+  puts '2 - Add "Strawberries" to cart'
+  puts '3 - Add "Coffee" to cart'
+  puts '4 - Show your current cart'
+  puts '5 - Show available offers'
+  puts '6 - Exit store'
+end
+
+while true
+  clear_screen
+  ask_user
+  key = STDIN.gets.to_i
+
+  case key
+  when 1 then @store.scan(:green_tea)
+  when 2 then @store.scan(:strawberries)
+  when 3 then @store.scan(:coffee)
+  when 4 then show_cart
+  when 5 then show_offers
+  when 6 then exit
+  else
+    puts 'Invalid option'
+    wait
+  end
+end
