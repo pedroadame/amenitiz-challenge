@@ -1,6 +1,6 @@
 # Store with cash register app
-This app allows the user to choose products and view the total price of the checkout process taking in account specific
-pricing rules.
+This app allows the user to choose products to buy and view the total price of
+the checkout process taking into account specific pricing rules.
 
 ### Available products
 | Product Code | Product      | Price   |
@@ -9,7 +9,7 @@ pricing rules.
 | SR1          | Strawberries | 5.00 €  |
 | CF1          | Coffee       | 11.23 € |
 
-### Special rules
+### Special offers
 
 - Buy-one-get-one-free (aka 2x1) on Green Tea
 - Three or more Strawberries for 4.50 € each.

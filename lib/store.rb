@@ -1,6 +1,6 @@
 require 'bigdecimal'
-# Describes the main store of the app
 
+# Describes the main store of the app
 class Store
   attr_reader :cart, :cashier, :stock
 
