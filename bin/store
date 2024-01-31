@@ -32,8 +32,8 @@ end
 def show_offers
   puts 'Current available offers:'
   puts '  2 x 1 on Green Teas'
-  puts '  Each unit of strawberries cost 4.50 € if you buy three or more'
-  puts '  Each coffee cost 2/3 of the price if you buy three or more'
+  puts '  Each unit of strawberries costs 4.50 € if you buy three or more'
+  puts '  Each coffee costs 2/3 of the price if you buy three or more'
   wait
 end
 
