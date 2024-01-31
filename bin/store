@@ -38,46 +38,44 @@ def show_offers
 end
 
 def show_cart
-  puts 'Your current cart contains:'
+  if @store.cart.empty?
+    puts 'Your cart is empty.'
+  else
+    puts 'Items in your cart:'
 
-  if @store.cart.items.any?
     @store.cart.items.group_by { |x| x[:code] }.each do |key, items|
       puts "  #{items.size} x #{items[0][:name]}"
     end
-  else
-    puts " - Cart is empty -"
   end
 
   puts ''
   puts "Total: #{@store.total.to_s('F')} €"
-
-  wait
 end
+
 
 def ask_user
   puts 'Welcome to our Store'
   puts '--------'
   puts 'Choose an option by entering a number followed by ENTER '
-  puts '1 - Add "Green Tea" to cart'
-  puts '2 - Add "Strawberries" to cart'
-  puts '3 - Add "Coffee" to cart'
-  puts '4 - Show your current cart'
-  puts '5 - Show available offers'
-  puts '6 - Exit store'
+  puts '1 - Add "Green Tea" to cart - 3.11 €'
+  puts '2 - Add "Strawberries" to cart - 5.00 €'
+  puts '3 - Add "Coffee" to cart - 11.23 €'
+  puts '4 - Show available offers'
+  puts '5 - Exit store'
 end
 
 while true
   clear_screen
   ask_user
+  show_cart
   key = STDIN.gets.to_i
 
   case key
   when 1 then @store.scan(:green_tea)
   when 2 then @store.scan(:strawberries)
   when 3 then @store.scan(:coffee)
-  when 4 then show_cart
-  when 5 then show_offers
-  when 6 then exit
+  when 4 then show_offers
+  when 5 then exit
   else
     puts 'Invalid option'
     wait
