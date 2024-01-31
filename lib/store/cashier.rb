@@ -14,7 +14,7 @@ class Store::Cashier
 
   # Calculates the total for a given cart
   def total(cart)
-    total = 0.0
+    total = BigDecimal(0.0, 8)
 
     grouped = cart.items.group_by { |item| item[:code].downcase.to_sym }
 
@@ -27,7 +27,7 @@ class Store::Cashier
       end
     end
 
-    total
+    total.round(2)
   end
 
   private

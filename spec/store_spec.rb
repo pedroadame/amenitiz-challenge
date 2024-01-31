@@ -11,6 +11,14 @@ RSpec.describe Store do
     end
   end
 
+  context 'when assigning stock' do
+    it 'converts prices to BigDecimal' do
+      stock = { product: { code: 'a', name: 'test', price: 1.00 } }
+      @store.stock = stock
+      expect(@store.stock[:product][:price]).to be_a(BigDecimal)
+    end
+  end
+
   context 'when user asks for a product' do
     context 'and the product is green tea' do
       before { @store.scan(:green_tea) }

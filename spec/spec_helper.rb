@@ -98,6 +98,7 @@ RSpec.configure do |config|
 end
 
 require 'pry'
+require 'bigdecimal'
 
 # Factory for a preconfigured store, as stock must be configurable
 def generate_store
