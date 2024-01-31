@@ -49,7 +49,7 @@ def show_cart
   end
 
   puts ''
-  puts "Total: #{@store.total} €"
+  puts "Total: #{@store.total.to_s('F')} €"
 
   wait
 end

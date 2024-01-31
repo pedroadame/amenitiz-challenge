@@ -17,7 +17,8 @@
 #    }
 
 class Store::PricingRule
-  attr_accessor :type, :price, :matching
+  attr_reader :price
+  attr_accessor :type, :matching
 
   # Types of matchings:
   # - exact: applies if the item quantity equals the specified value
@@ -37,7 +38,7 @@ class Store::PricingRule
 
   def initialize(type = nil, price = nil, matching = nil)
     self.type = type
-    self.price = price
+    self.price = BigDecimal(price, 8)
     self.matching = matching
   end
   
@@ -55,6 +56,9 @@ class Store::PricingRule
     !valid?
   end
 
+  def price=(price)
+    @price = BigDecimal(price, 8)
+  end
 
   # Checks whether a set of items matches with this rule
   def applies?(items)

@@ -4,6 +4,19 @@ require './lib/store/pricing_rule'
 RSpec.describe Store::PricingRule do
   before(:each) { @rule = described_class.new(:green_tea, 1.0, {exact: 2}) }
 
+  context 'when initialized' do
+    it 'converts price to BigDecimal' do
+      expect(@rule.price).to be_a(BigDecimal)
+    end
+  end
+
+  context 'when assigning price' do
+    it 'converts price to BigDecimal' do
+      @rule.price = 2.00
+      expect(@rule.price).to be_a(BigDecimal)
+    end
+  end
+
   describe '#valid?' do
     context 'when matching is one of:' do
       %w[exact more_than more_than_or_equals_to less_than less_than_or_equals_to].each do |match|

@@ -1,10 +1,8 @@
+require 'bigdecimal'
 # Describes the main store of the app
 
 class Store
-  # Available products
-  attr_accessor :stock
-
-  attr_reader :cart, :cashier
+  attr_reader :cart, :cashier, :stock
 
   def initialize(pricing_rules = [])
     # User's cart
@@ -28,5 +26,12 @@ class Store
 
   def add_pricing_rule(rule)
     @cashier.add_rule(rule)
+  end
+
+  def stock=(stock)
+    @stock = stock.each_with_object({}) do |(k, v), h|
+      v[:price] = BigDecimal(v[:price], 8)
+      h[k] = v
+    end
   end
 end
